@@ -45,13 +45,14 @@ public class Solution43 {
 
 ```
 
-
+### 20. 有效的括号
 给定一个只包括 '('，')'，'{'，'}'，'['，']'的字符串 s ，判断字符串是否有效。
 
 有效字符串需满足：
 
 左括号必须用相同类型的右括号闭合。
 左括号必须以正确的顺序闭合。
+
 ```java
 public class Solution20 {
     public boolean isValid(String s) {
@@ -70,10 +71,6 @@ public class Solution20 {
             }
         }
         return ss.empty();
-    }
-
-    public static void main(String[] args) {
-
     }
 }
 ```
@@ -122,12 +119,6 @@ public class Solution17 {
         for(char c1 : s.toCharArray()){
             letterCombinations(digits, temp, index, str + c1, list);
         }
-    }
-
-    public static void main(String[] args) {
-        Solution17 solution17 = new Solution17();
-        List<String> strings = solution17.letterCombinations("");
-        strings.forEach(System.out::println);
     }
 }
 ```
