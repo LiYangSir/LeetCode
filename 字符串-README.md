@@ -1,6 +1,123 @@
 ## String
 
-### 43 字符串相乘
+### 滑动窗口
+
+模板
+
+```java
+for (int i = 0; i < s.length(); i++) {
+    char c = s.charAt(i);
+    windows.add(s[i]);
+    while(vaild){
+        window.remove(s[left]);
+        left++;
+    }
+}
+```
+
+#### 3. 无重复字符的最长字串
+
+给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+
+示例 1:
+> 输入: s = "abcabcbb"
+> 输出: 3 
+> 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+
+示例 2:
+> 输入: s = "bbbbb"
+> 输出: 1
+> 解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+
+示例 3:
+> 输入: s  "pwwkew"
+> 输出: 3
+> 解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+>      请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+
+示例 4:
+> 输入: s = ""
+> 输出: 0
+
+```java
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character, Integer> cache = new HashMap<>();
+        int left = 0;
+        int max = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (cache.containsKey(c)) {
+                left = Math.max(left, cache.get(c) + 1);
+            }
+            max = Math.max(max, i - left + 1);
+            cache.put(c, i);
+        }
+        return max;
+    }
+}
+```
+
+
+
+### 76. 最小覆盖子串
+
+给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
+
+注意：如果 s 中存在这样的子串，我们保证它是唯一的答案。
+
+示例 1：
+
+> 输入：s = "ADOBECODEBANC", t = "ABC"
+> 输出："BANC"
+
+示例 2：
+
+> 输入：s = "a", t = "a"
+> 输出："a"
+
+```java
+class Solution {
+    public String minWindow(String s, String t) {
+        if (s.length() < t.length()) {
+            return "";
+        }
+        Map<Character, Integer> needs = new HashMap<>();
+        Map<Character, Integer> windows = new HashMap<>();
+        for (char c : t.toCharArray()) {
+            needs.put(c, needs.computeIfAbsent(c, k -> 0) + 1);
+        }
+        int left = 0;
+        int match = 0;
+        int minLen = s.length() + 1;
+        int start = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);   // 1.
+            windows.put(c, windows.computeIfAbsent(c, k -> 0) + 1); // 2.
+            if(windows.get(c).equals(needs.get(c)))  //3. 
+                match++;
+            while (match == needs.size()) {
+                if (minLen > i - left + 1) {
+                    minLen = i - left + 1;
+                    start = left;
+                }
+                char c1 = s.charAt(left);
+                windows.put(c1, windows.get(c1) - 1);
+                if (needs.containsKey(c1) && windows.get(c1) < needs.get(c1)) {
+                    match--;
+                }
+                left++;
+            }
+        }
+        return minLen > s.length() ? "" : s.substring(start, start + minLen);
+    }
+}
+```
+
+
+
+## 43 字符串相乘
+
 给定两个以字符串形式表示的非负整数num1和num2，返回num1和num2的乘积，它们的乘积也表示为字符串形式。
 
 示例 1:
@@ -45,7 +162,8 @@ public class Solution43 {
 
 ```
 
-### 20. 有效的括号
+## 20. 有效的括号
+
 给定一个只包括 '('，')'，'{'，'}'，'['，']'的字符串 s ，判断字符串是否有效。
 
 有效字符串需满足：
@@ -74,7 +192,8 @@ public class Solution20 {
     }
 }
 ```
-### 17. 电话号码的字母组合
+## 17. 电话号码的字母组合
+
 给定一个仅包含数字2-9的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。
 
 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
