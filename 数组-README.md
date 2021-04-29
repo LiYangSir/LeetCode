@@ -301,3 +301,113 @@ public class Solution300 {
 }
 
 ```
+
+### 31. 下一个排列
+
+实现获取 下一个排列 的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。
+
+如果不存在下一个更大的排列，则将数字重新排列成最小的排列（即升序排列）。
+
+必须 原地 修改，只允许使用额外常数空间。
+
+示例 1：
+
+> 输入：nums = [1,2,3]
+> 输出：[1,3,2]
+
+示例 2：
+
+> 输入：nums = [3,2,1]
+> 输出：[1,2,3]
+
+示例 3：
+
+> 输入：nums = [1,1,5]
+> 输出：[1,5,1]
+
+
+示例 4：
+```
+输入：nums = [1]
+输出：[1]
+```
+
+```java
+/**
+  * 核心是从后往前找到一个较小的数，也就是突然递减的数
+  * 根据这个较小的数，找到一个比它大的数进行替换，保证后面的一个有序性
+  * 并反转较小数后面的数，保证数据的递增
+  */
+public class Solution31 {
+    public void nextPermutation(int[] nums) {
+        int i = nums.length - 1;
+        while (i > 0 && nums[i] <= nums[i - 1]){
+            i--;
+        }
+        i--;
+        if (i >= 0) {
+            int j = nums.length - 1;
+            while (j > i && nums[j] <= nums[i]){
+                j--;
+            }
+            swap(nums, i, j);
+        }
+        for (int m = i + 1; m < i + 1+ (nums.length - i - 1) / 2; m++) {
+            swap(nums, m, nums.length - m + i);
+        }
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+}
+```
+
+### 34. 在排序数组中查找元素的第一个和最后一个元素
+
+给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。
+
+如果数组中不存在目标值 target，返回 [-1, -1]。
+
+
+示例 1：
+
+> 输入：nums = [5,7,7,8,8,10], target = 8
+> 输出：[3,4]
+
+示例 2：
+
+> 输入：nums = [5,7,7,8,8,10], target = 6
+> 输出：[-1,-1]
+
+示例 3：
+
+> 输入：nums = [], target = 0
+> 输出：[-1,-1]
+
+```java
+public class Solution34 {
+    public int[] searchRange(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (target == nums[mid]) {
+                int l = mid;
+                int r = mid;
+                while (l - 1 >= 0 && nums[l - 1] == nums[mid]){l--;};
+                while (r + 1 < nums.length && nums[r + 1] == nums[mid]){r++;};
+                return new int[]{l, r};
+            } else if (target > nums[mid]) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return new int[]{-1, -1};
+    }
+}
+```
+

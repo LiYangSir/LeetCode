@@ -3,7 +3,57 @@
 对于节点的不重用，引入used数组，并进行回溯的变换。
 对于节点包含重复的节点， 首先进行节点的排序，并增加判断条件
 
+### 22. 括号生成
+
+数字 `n` 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 **有效的** 括号组合。
+
+**示例 1：**
+
+```
+输入：n = 3
+输出：["((()))","(()())","(())()","()(())","()()()"]
+```
+
+**示例 2：**
+
+```
+输入：n = 1
+输出：["()"]
+```
+
+```java
+/**
+ * 将括号看成["(", ")"]
+ */
+public class Solution22 {
+    public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<>();
+        StringBuilder builder = new StringBuilder();
+        dfs(res, builder,0, 0, n);
+        return res;
+    }
+
+    private void dfs(List<String> res, StringBuilder builder, int open, int close, int max) {
+        if (open + close == max * 2) {
+            res.add(builder.toString());
+        }
+        if (open < max) {
+            builder.append("(");
+            dfs(res, builder, open + 1, close, max);
+            builder.delete(builder.length() - 1, builder.length());
+        }
+        if (close < open) {
+            builder.append(")");
+            dfs(res, builder, open, close + 1, max);
+            builder.delete(builder.length() - 1, builder.length());
+        }
+    }
+}
+
+```
+
 ### 39. 组合总数
+
 给定一个无重复元素的数组candidates和一个目标数`target`，找出candidates中所有可以使数字和为 'target' 的组合。
 candidates中的数字可以无限制重复被选取。
 
