@@ -4,7 +4,7 @@
 
 模板
 
-```java
+```c++
 for (int i = 0; i < s.length(); i++) {
     char c = s.charAt(i);
     windows.add(s[i]);

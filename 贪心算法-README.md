@@ -18,7 +18,7 @@ public class Solution45 {
         }
         return steps;
     }
-    //时间复杂度更低，正向传播
+    //时间复杂度更低，正向传播： 	Good
     public int jump2(int[] nums) {
         int steps = 0;
         int maxPosition = 0;
