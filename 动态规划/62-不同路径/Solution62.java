@@ -35,6 +35,6 @@ public class Solution62 {
 
     public static void main(String[] args) {
         Solution62 solution62 = new Solution62();
-        System.out.println(solution62.uniquePaths2(3, 7));
+        System.out.println(solution62.uniquePaths2(3, 3));
     }
 }
