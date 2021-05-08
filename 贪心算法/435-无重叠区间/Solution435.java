@@ -15,7 +15,4 @@ public class Solution435 {
         }
         return intervals.length - res;
     }
-    public static void main(String[] args) {
-
-    }
 }

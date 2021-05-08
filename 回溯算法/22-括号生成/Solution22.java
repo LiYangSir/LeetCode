@@ -33,6 +33,6 @@ public class Solution22 {
 
     public static void main(String[] args) {
         Solution22 solution22 = new Solution22();
-        System.out.println(solution22.generateParenthesis(1));
+        System.out.println(solution22.generateParenthesis(3));
     }
 }

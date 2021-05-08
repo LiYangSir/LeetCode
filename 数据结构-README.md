@@ -1,4 +1,5 @@
 # 数据结构
+
 ## 146-LRU缓存机制
 ```java
 class LRUCache{
