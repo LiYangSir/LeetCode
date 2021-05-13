@@ -94,7 +94,7 @@ class Solution39 {
         int length = candidates.length;
         for (int i = index; i < length; i++) {   // 重用的写法
             path.addLast(candidates[i]);
-            dfs(candidates, target - candidates[i], res, path, i);
+            dfs(candidates, target - candidates[i], res, path, i);  // 不同于子集，是从当前位置开始: index = i
             path.removeLast();
         }
     }
@@ -255,3 +255,66 @@ class Solution47 {
     }
 }
 ```
+
+### 51. N皇后
+
+```java
+public class Solution51 {
+    public List<List<String>> solveNQueens(int n) {
+        List<List<String>> res = new ArrayList<>();
+        Deque<Integer> stack = new ArrayDeque<>();
+        boolean[] used = new boolean[n];
+        dfs(res, stack, n, used);
+        return res;
+    }
+
+    private void dfs(List<List<String>> res,  Deque<Integer> stack, int n, boolean[] used) {
+        if (stack.size() == n) {
+            ArrayList<String> strings = new ArrayList<>();
+            for (Integer integer : stack) {
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < n; i++) {
+                    if (integer == i) {
+                        stringBuilder.append("Q");
+                    } else {
+                        stringBuilder.append(".");
+                    }
+                }
+                strings.add(stringBuilder.toString());
+            }
+            res.add(strings);
+        }
+        for (int i = 0; i < n; i++) {
+            if (used[i] || (stack.size() != 0 && (stack.getLast() == i + 1 || stack.getLast() == i - 1))) continue;
+            stack.addLast(i);
+            used[i] = true;
+            dfs(res, stack, n, used);
+            stack.removeLast();
+            used[i] = false;
+        }
+    }
+}
+```
+
+### 78. 子集
+
+```java
+public class Solution78 {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        Deque<Integer> stack = new ArrayDeque<>();
+        dfs(nums, res, stack, 0);
+        return res;
+    }
+
+    private void dfs(int[] nums, List<List<Integer>> res, Deque<Integer> stack, int start) {
+        res.add(new ArrayList<>(stack));
+        for (int i = start; i < nums.length; i++) {
+            stack.addLast(nums[i]);
+            dfs(nums, res, stack, i + 1);
+            stack.removeLast();
+        }
+    }
+}
+```
+

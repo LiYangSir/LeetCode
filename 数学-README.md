@@ -1,7 +1,135 @@
 # 数学
-## 位运算
+
+[toc]
+
+# 基本计算器
+
+## 224-基本计算器
+
+```java
+public class Solution224 {
+    public int calculate(String s) {
+        Deque<Character> stack = new ArrayDeque<>();
+        for (char c : s.toCharArray())
+            stack.offer(c);
+        return calculate(s, stack);
+    }
+
+    private int calculate(String s, Deque<Character> stack) {
+        Deque<Integer> ss = new ArrayDeque<>();
+        int num = 0;
+        char sign = '+';
+        while (!stack.isEmpty()) {
+            char pop = stack.poll();
+            if (isDigital(pop)) {
+                num = num * 10 + (pop - '0');
+            }
+            if (pop == '(') {
+                num = calculate(s, stack);
+            }
+            if (!isDigital(pop) && pop != ' ' || stack.isEmpty()){
+                switch (sign) {
+                    case '+':
+                        ss.push(num);
+                        break;
+                    case '-':
+                        ss.push(-num);
+                        break;
+                    case '*':
+                        Integer pre = ss.pop();
+                        ss.push(num * pre);
+                        break;
+                    case '/':
+                        Integer pre2 = ss.pop();
+                        ss.push(pre2 / num);
+                        break;
+                }
+                num = 0;
+                sign = pop;
+            }
+            if (pop == ')') break;
+        }
+        return sum(ss);
+    }
+
+    private int sum(Deque<Integer> ss) {
+        int sum = 0;
+        for (Integer s : ss) {
+            sum += s;
+        }
+        return sum;
+    }
+
+    private boolean isDigital(char pop) {
+        return (pop - '0') < 10 && (pop - '0') >= 0;
+    }
+}
+```
+
+## 227-基本计算器 II
+
+```java
+public class Solution227 {
+    public int calculate(String s) {
+        Deque<Character> stack = new ArrayDeque<>();
+        for (char c : s.toCharArray())
+            stack.offer(c);
+        return calculate(s, stack);
+    }
+
+    private int calculate(String s, Deque<Character> stack) {
+        Deque<Integer> ss = new ArrayDeque<>();
+        int num = 0;
+        char sign = '+';
+        while (!stack.isEmpty()) {
+            char pop = stack.poll();
+            if (isDigital(pop)) {
+                num = num * 10 + (pop - '0');
+            }
+            if (!isDigital(pop) && pop != ' ' || stack.isEmpty()){
+                switch (sign) {
+                    case '+':
+                        ss.push(num);
+                        break;
+                    case '-':
+                        ss.push(-num);
+                        break;
+                    case '*':
+                        Integer pre = ss.pop();
+                        ss.push(num * pre);
+                        break;
+                    case '/':
+                        Integer pre2 = ss.pop();
+                        ss.push(pre2 / num);
+                        break;
+                }
+                num = 0;
+                sign = pop;
+            }
+        }
+        return sum(ss);
+    }
+
+    private int sum(Deque<Integer> ss) {
+        int sum = 0;
+        for (Integer s : ss) {
+            sum += s;
+        }
+        return sum;
+    }
+
+    private boolean isDigital(char pop) {
+        return (pop - '0') < 10 && (pop - '0') >= 0;
+    }
+}
+```
+
+
+
+# 位运算
 
 1.利用或操作 | 和空格将英文字符转换为小写
+
 >('a' | ' ') = 'a'
 ('A' | ' ') = 'a'
 
@@ -26,7 +154,8 @@ bool f = ((x ^ y) < 0); // false
 
 > n&(n-1) 这个操作是算法中常见的，作用是消除数字 n 的二进制表示中的最后一个 1。
 
-### 191. 位1的个数
+## 191. 位1的个数
+
 编写一个函数，输入是一个无符号整数（以二进制串的形式），返回其二进制表达式中数字位数为 '1' 的个数（也被称为汉明重量）。
 
 示例 1：
@@ -47,7 +176,8 @@ public class Solution {
 }
 ```
 
-### 231. 2的幂
+## 231. 2的幂
+
 给定一个整数，编写一个函数来判断它是否是 2 的幂次方。
 
 示例 1:

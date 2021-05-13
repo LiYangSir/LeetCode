@@ -1,4 +1,4 @@
-# 数据结构
+## 数据结构
 
 ## 146-LRU缓存机制
 ```java
@@ -35,7 +35,82 @@ class LRUCache{
     }
 }
 ```
+## 225. 用队列实现栈
+
+```java
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+class MyStack {
+    private Deque<Integer> queue = new ArrayDeque<>();
+    int top_element = 0;
+
+    public void push(int x) {
+        queue.offer(x);
+        top_element = x;
+    }
+
+    public int pop() {
+        int size = queue.size();
+        while (size - 2 > 0) {
+            queue.offer(queue.poll());
+            size--;
+        }
+        top_element = queue.poll();
+        queue.offer(top_element);
+        return queue.poll();
+    }
+
+    public int top() {
+        return top_element;
+    }
+
+    public boolean empty() {
+        return queue.isEmpty();
+    }
+}
+```
+
+## 232. 用栈实现队列
+
+```java
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+class MyStack {
+    private Deque<Integer> queue = new ArrayDeque<>();
+    int top_element = 0;
+
+    public void push(int x) {
+        queue.offer(x);
+        top_element = x;
+    }
+
+    public int pop() {
+        int size = queue.size();
+        while (size - 2 > 0) {
+            queue.offer(queue.poll());
+            size--;
+        }
+        top_element = queue.poll();
+        queue.offer(top_element);
+        return queue.poll();
+    }
+
+    public int top() {
+        return top_element;
+    }
+
+    public boolean empty() {
+        return queue.isEmpty();
+    }
+}
+```
+
+
+
 ## 单调栈
+
 ### 496-下一个更大元素 I
 给你两个 没有重复元素 的数组nums1 和nums2，其中nums1是nums2的子集。
 请你找出 nums1中每个元素在nums2中的下一个比其大的值。
@@ -48,7 +123,7 @@ nums1中数字x的下一个更大元素是指x在nums2中对应位置的右边�
     对于 num1 中的数字 4 ，你无法在第二个数组中找到下一个更大的数字，因此输出 -1 。
     对于 num1 中的数字 1 ，第二个数组中数字1右边的下一个较大数字是 3 。
     对于 num1 中的数字 2 ，第二个数组中没有下一个更大的数字，因此输出 -1 。
-    
+
 示例 2:
 >输入: nums1 = [2,4], nums2 = [1,2,3,4].
 输出: [3,-1]

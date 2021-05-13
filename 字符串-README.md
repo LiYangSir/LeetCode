@@ -297,7 +297,7 @@ public class Solution12 {
 
     public String intToRoman(int num) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < values.length && num >= 0; i++) {
+        for (int i = 0; i < values.length && num >= 0; i++) { // && num >= 0;
             while (values[i] <= num) {
                 num -= values[i];
                 sb.append(symbols[i]);

@@ -54,7 +54,7 @@ public class Solution435 {
         int res = 1;
         int end = intervals[0][1];
         for (int[] interval : intervals) {
-            if (interval[0] >       end) {
+            if (interval[0] > end) {
                 res++;
                 end = interval[1];
             }

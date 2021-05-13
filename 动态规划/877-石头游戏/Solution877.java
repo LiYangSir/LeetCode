@@ -5,7 +5,6 @@ public class Solution877 {
         // base case
         for (int i = 0; i < n; i++) {
             dp[i][i] = piles[i];
-            dp[i][i] = 0;
         }
         // 斜着进行遍历
         for (int i = n - 2; i >= 0; i--) {
@@ -20,5 +19,8 @@ public class Solution877 {
     public static void main(String[] args) {
         Solution877 solution877 = new Solution877();
         System.out.println(solution877.stoneGame(new int[]{3, 2, 10, 4}));
+    }
+    static class A{
+        private int a = 0;
     }
 }
