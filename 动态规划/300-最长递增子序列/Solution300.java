@@ -9,7 +9,7 @@ public class Solution300 {
         int res = 0;
         for (int i = 1; i < nums.length; i++) {
             for (int j = 0; j < i; j++) {  // 更新DP
-                if (nums[j] < nums[i])
+                if (nums[j] < nums[i])  // 注意这里是大于号
                     dp[i] = Math.max(dp[j] + 1, dp[i]);
             }
             res = Math.max(res, dp[i]);

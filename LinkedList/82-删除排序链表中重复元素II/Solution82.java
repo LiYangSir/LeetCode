@@ -1,5 +1,5 @@
 public class Solution82 {
-    class ListNode {
+    static class ListNode {
         int val;
         ListNode next;
 
