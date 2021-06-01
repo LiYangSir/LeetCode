@@ -214,7 +214,67 @@ public class Solution42 {
 
 ### 二分搜索法
 
+模板方法
+
+```java
+int binarySearch(int[] nums, int target) {
+    int left = 0; 
+    int right = nums.length; // 注意
+
+    while(left < right) {
+        int mid = left + (right - left) / 2;
+        if(nums[mid] == target)
+            return mid; 
+        else if (nums[mid] < target)
+            left = mid + 1; // 注意
+        else if (nums[mid] > target)
+            right = mid; // 注意
+    }
+    return -1;
+}
+```
+
+```java
+int left_bound(int[] nums, int target) {
+    if (nums.length == 0) return -1;
+    int left = 0;
+    int right = nums.length;
+    
+    while (left < right) {
+        int mid = (left + right) / 2;
+        if (nums[mid] == target) {
+            right = mid;   // 注意
+        } else if (nums[mid] < target) {
+            left = mid + 1;
+        } else if (nums[mid] > target) {
+            right = mid;
+        }
+    }
+    return left;  // 注意
+}
+```
+
+```java
+int right_bound(int[] nums, int target) {
+    if (nums.length == 0) return -1;
+    int left = 0, right = nums.length;
+    
+    while (left < right) {
+        int mid = (left + right) / 2;
+        if (nums[mid] == target) {
+            left = mid + 1;    // 注意
+        } else if (nums[mid] < target) {
+            left = mid + 1;
+        } else if (nums[mid] > target) {
+            right = mid;
+        }
+    }
+    return left - 1; // 注意
+}
+```
+
 #### 33. 搜索旋转排序数组
+
 整数数组 nums 按升序排列，数组中的值 互不相同 。
 
 在传递给函数之前，nums 在预先未知的某个下标 k（0 <= k < nums.length）上进行了 旋转，使数组变为 [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]（下标 从 0 开始 计数）。例如， [0,1,2,4,5,6,7] 在下标 3 处经旋转后可能变为 [4,5,6,7,0,1,2] 。
