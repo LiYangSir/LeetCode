@@ -20,7 +20,4 @@ public class Solution877 {
         Solution877 solution877 = new Solution877();
         System.out.println(solution877.stoneGame(new int[]{3, 2, 10, 4}));
     }
-    static class A{
-        private int a = 0;
-    }
 }

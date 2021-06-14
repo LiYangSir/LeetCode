@@ -194,5 +194,116 @@ class Solution {
 }
 ```
 
+# 29-两数相除
 
+给定两个整数，被除数 dividend 和除数 divisor。将两数相除，要求不使用乘法、除法和 mod 运算符。
+
+返回被除数 dividend 除以除数 divisor 得到的商。
+
+整数除法的结果应当截去（truncate）小数部分，例如：truncate(8.345) = 8 以及 truncate(-2.7335) = -2
+
+示例 1:
+
+> 输入: dividend = 10, divisor = 3
+>
+> 输出: 3
+> 解释: 10/3 = truncate(3.33333..) = truncate(3) = 3
+
+示例 2:
+
+> 输入: dividend = 7, divisor = -3
+> 输出: -2
+> 解释: 7/-3 = truncate(-2.33333..) = -2
+
+```java
+public class Solution29 {
+    public int divide(int dividend, int divisor) {
+        int res = 0;
+        if(dividend >  divisor){
+            while(dividend - divisor >= 0){
+                dividend -= divisor;
+                res++;
+            }
+        }else{
+            while((dividend < 0 && dividend + divisor <=0) || (dividend > 0 && dividend + divisor >=0)){
+                dividend += divisor;
+                res--;
+            }
+        }
+        return res;
+    }
+}
+```
+
+# 204-计算质数
+
+统计所有小于非负整数 n 的质数的数量。
+
+示例 1：
+
+> 输入：n = 10
+> 输出：4
+> 解释：小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7 。
+
+示例 2：
+
+> 输入：n = 0
+> 输出：0
+
+示例 3：
+
+> 输入：n = 1
+> 输出：0
+
+```java
+public class Solution204 {
+    public int countPrimes(int n) {
+        boolean[] isPrim = new boolean[n];
+        Arrays.fill(isPrim, true);
+
+        for (int i = 2; i * i < n; i++) { // 截取一半
+            if (isPrim[i]) {
+                for (int j = i * i; j < n; j += i) { // 成倍数的增加
+                    isPrim[j] = false;
+                }
+            }
+        }
+        int count = 0;
+        for (int i = 2; i < n; i++) {
+            if (isPrim[i]) count++;
+        }
+        return count;
+    }
+}
+
+```
+
+# 633-平方数之和
+
+给定一个非负整数 c ，你要判断是否存在两个整数 a 和 b，使得 a2 + b2 = c 。
+
+示例 1：
+
+> 输入：c = 5
+> 输出：true
+> 解释：1 * 1 + 2 * 2 = 5
+
+示例 2：
+
+> 输入：c = 3
+> 输出：false
+
+```java
+public class Solution633 {
+    public boolean judgeSquareSum(int c) {
+        int size = (int) Math.sqrt(c);
+        for (int i = 0; i <= size; i++) {
+            int b = (int) Math.sqrt(c - i * i);
+            if (b * b == c - i * i)
+                return true;
+        }
+        return false;
+    }
+}
+```
 

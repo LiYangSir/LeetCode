@@ -1,18 +1,17 @@
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 public class Solution51 {
     public List<List<String>> solveNQueens(int n) {
         List<List<String>> res = new ArrayList<>();
         Deque<Integer> stack = new ArrayDeque<>();
-        boolean[] used = new boolean[n];
-        dfs(res, stack, n, used);
+        Set<Integer> positive = new HashSet<>();
+        Set<Integer> used = new HashSet<>();
+        Set<Integer> reverse = new HashSet<>();
+        dfs(res, stack, n, used, positive, reverse);
         return res;
     }
 
-    private void dfs(List<List<String>> res,  Deque<Integer> stack, int n, boolean[] used) {
+    private void dfs(List<List<String>> res,  Deque<Integer> stack, int n, Set<Integer> used, Set<Integer> positive, Set<Integer> reverse) {
         if (stack.size() == n) {
             ArrayList<String> strings = new ArrayList<>();
             for (Integer integer : stack) {
@@ -29,12 +28,17 @@ public class Solution51 {
             res.add(strings);
         }
         for (int i = 0; i < n; i++) {
-            if (used[i] || (stack.size() != 0 && (stack.getLast() == i + 1 || stack.getLast() == i - 1))) continue;
+            int size = stack.size();
+            if (used.contains(i) || positive.contains(i - size) || reverse.contains(i + size)) continue;
             stack.addLast(i);
-            used[i] = true;
-            dfs(res, stack, n, used);
+            used.add(i);
+            positive.add(i - size);
+            reverse.add(i + size);
+            dfs(res, stack, n, used, positive, reverse);
             stack.removeLast();
-            used[i] = false;
+            used.remove(i);
+            positive.remove(i - size);
+            reverse.remove(i + size);
         }
     }
 
