@@ -29,11 +29,20 @@ public class Solution93 {
             res.add(sb.toString());
             return;
         }
-        List<Integer> list = listActive(s, index);
-        if (list.size() == 0) return;
-        for (int i = 0; i < list.size(); i++) {
-            stack.addLast(s.substring(index, list.get(i)));
-            dfs(s, res, stack, list.get(i));
+//        List<Integer> list = listActive(s, index);
+//        if (list.size() == 0) return;
+//        for (int i = 0; i < list.size(); i++) {
+//            stack.addLast(s.substring(index, list.get(i)));
+//            dfs(s, res, stack, list.get(i));
+//            stack.removeLast();
+//        }
+        for (int i = 1; i < 4; i++) {
+            if ((index + i) > s.length()) break;
+            String substring = s.substring(index, index + i);
+            int anInt = Integer.parseInt(substring);
+            if (anInt > 255 || (anInt + "").length() < i) break;
+            stack.addLast(substring);
+            dfs(s, res, stack, index + i);
             stack.removeLast();
         }
     }

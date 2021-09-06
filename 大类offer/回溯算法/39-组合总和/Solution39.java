@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-class Solution39 {
+class Solution39_2 {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> res = new ArrayList<>();
         Deque<Integer> path = new ArrayDeque<>();
@@ -25,11 +25,4 @@ class Solution39 {
             path.removeLast();
         }
     }
-
-    public static void main(String[] args) {
-        Solution39 solution39 = new Solution39();
-        List<List<Integer>> lists = solution39.combinationSum(new int[]{2, 3, 5}, 8);
-        System.out.println(lists);
-    }
-
 }
