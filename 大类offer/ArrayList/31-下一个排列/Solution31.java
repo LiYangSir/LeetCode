@@ -17,7 +17,7 @@ public class Solution31 {
             }
             swap(nums, i, j);
         }
-        for (int m = i + 1; m < i + 1+ (nums.length - i - 1) / 2; m++) {
+        for (int m = i + 1; m < i + 1 + (nums.length - i - 1) / 2; m++) {
             swap(nums, m, nums.length - m + i);
         }
     }

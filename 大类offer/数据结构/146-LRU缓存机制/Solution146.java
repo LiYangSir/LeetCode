@@ -34,7 +34,4 @@ class LRUCache{
         cache.put(key, value);
         return value;
     }
-    public static void main(String[] args) {
-
-    }
 }

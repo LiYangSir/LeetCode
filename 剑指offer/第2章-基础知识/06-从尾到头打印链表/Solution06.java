@@ -1,6 +1,4 @@
-package s06_从尾到头打印链表;
-
-import common.ListNode;
+import cn.quguai.ListNode;
 
 import java.util.ArrayList;
 import java.util.List;
