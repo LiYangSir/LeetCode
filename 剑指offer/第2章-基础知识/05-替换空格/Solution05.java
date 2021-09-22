@@ -1,5 +1,3 @@
-package s05_替换空格;
-
 /**
  * @author LiYangSir
  * @date 2021/6/14

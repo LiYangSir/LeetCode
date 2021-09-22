@@ -1,5 +1,3 @@
-package s08_用两个栈实现队列;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 

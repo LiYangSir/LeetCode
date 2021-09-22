@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 public class Solution20 {
@@ -19,9 +17,5 @@ public class Solution20 {
             }
         }
         return ss.empty();
-    }
-
-    public static void main(String[] args) {
-
     }
 }

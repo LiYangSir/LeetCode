@@ -1,3 +1,5 @@
+import cn.quguai.ListNode;
+
 public class Solution24 {
     public Solution82.ListNode swapPairs(Solution82.ListNode head) {
         if (head == null || head.next == null) {
@@ -14,7 +16,7 @@ public class Solution24 {
         if (head == null || head.next == null) {
             return head;
         }
-        ListNode dump = new ListNode();
+        ListNode dump = new ListNode(-1);
         dump.next = head;
 
         ListNode temp = dump;
