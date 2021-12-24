@@ -1,3 +1,7 @@
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Stream;
+
 public class Solution31 {
     /**
      * 核心是从后往前找到一个较小的数，也就是突然递减的数
@@ -6,13 +10,13 @@ public class Solution31 {
      */
     public void nextPermutation(int[] nums) {
         int i = nums.length - 1;
-        while (i > 0 && nums[i] <= nums[i - 1]){
+        while (i > 0 && nums[i] <= nums[i - 1]) {
             i--;
         }
         i--;
         if (i >= 0) {
             int j = nums.length - 1;
-            while (j > i && nums[j] <= nums[i]){
+            while (j > i && nums[j] <= nums[i]) {
                 j--;
             }
             swap(nums, i, j);
@@ -24,12 +28,25 @@ public class Solution31 {
 
     private void swap(int[] nums, int i, int j) {
         int temp = nums[i];
-        nums[i] = nums[j];
+        nums[i] = nums[j]  ;
         nums[j] = temp;
     }
 
-    public static void main(String[] args) {
-        Solution31 solution31 = new Solution31();
-        solution31.nextPermutation(new int[]{1, 2, 3});
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> 1);
+        future = future.thenApply(integer -> {
+            System.out.println(integer);
+            return 1 / 0;
+        });
+        future = future.thenApply(integer -> {
+            System.out.println(integer);
+            return 1;
+        });
+        future = future.exceptionally(throwable -> throwable == null ? 1 : 0);
+        Integer integer = future.get();
+        System.out.println(integer);
+        Stream.of(1, 2, 3, 2, 1)
+                .dropWhile(n -> n < 3)
+                .forEach(System.out::println); // [3, 2, 1]
     }
 }

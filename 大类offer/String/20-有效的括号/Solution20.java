@@ -18,4 +18,9 @@ public class Solution20 {
         }
         return ss.empty();
     }
+
+    public static void main(String[] args) {
+        Solution20 solution20 = new Solution20();
+        solution20.isValid("{}");
+    }
 }

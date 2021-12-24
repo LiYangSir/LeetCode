@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class Solution72 {
     public int minDistance(String word1, String word2) {
@@ -28,6 +30,14 @@ public class Solution72 {
     }
 
     public static void main(String[] args) {
-
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            list.add(i);
+        }
+        List<Integer> strings = list.subList(1, 3);
+        strings.forEach(System.out::println);
+        strings.add(1);
+        strings.remove(0);
+        System.out.println(strings);
     }
 }
